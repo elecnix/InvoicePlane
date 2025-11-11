@@ -10,13 +10,10 @@ COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr
 RUN apt-get update && apt-get install -y \
     mariadb-client \
     libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libmcrypt-dev \
+    libjpeg-dev \
     libpng-dev \
-    libcurl4-nss-dev \
-    libc-client-dev \
+    libcurl4-openssl-dev \
     libkrb5-dev \
-    firebird-dev \
     libicu-dev \
     libxml2-dev \
     libxslt1-dev \
@@ -28,8 +25,7 @@ RUN apt-get update && apt-get install -y \
     git \
     libzip-dev \
     locales-all \
-    libonig-dev \
-    wkhtmltopdf
+    libonig-dev
 
 RUN install-php-extensions \
     bcmath \
@@ -37,7 +33,6 @@ RUN install-php-extensions \
     exif \
     gd \
     imagick \
-    imap \
     intl \
     mysqli \
     pdo_mysql \
@@ -74,7 +69,7 @@ RUN apt-get -y autoclean && \
     apt-get -y autoremove && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* && \
-    rm /var/log/lastlog /var/log/faillog
+    rm -f /var/log/lastlog /var/log/faillog
 
 # Configure non-root user.
 ARG PUID=1000
